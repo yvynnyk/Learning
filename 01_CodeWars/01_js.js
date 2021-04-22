@@ -48,3 +48,50 @@ function seatsInTheater(nCols, nRows, col, row) {
 }
 
 console.log(seatsInTheater(16,11,5,3) == 96);
+
+//If the number has an integer square root, take this, otherwise square the number.
+//[4,3,9,7,2,1] -> [2,9,3,49,4,1]
+
+function squareOrSquareRoot(array) {
+    return array.map(x => Math.pow(x, 1/2) % 1 ? Math.pow(x, 2) : Math.pow(x, 1/2));  
+}
+
+//123456 --> 654321
+//105 --> 510
+//12 --> 21
+
+function superSize(num){
+    return +[...String(num)].sort((a, b) => b - a).join("");
+}
+
+console.log(superSize(700000000001) ==710000000000);
+
+//Given a sequence of integers, return the sum of all the integers that have an even index, multiplied by the integer at the last index.
+//If the sequence is empty, you should return 0.
+
+function evenLast(numbers) {
+    return numbers.length != 0 ? [...numbers.filter((x, i) => i % 2 == 0)].reduce((sum, num) => sum + num) * numbers[numbers.length - 1] : 0
+}
+
+//solution([1, 2, 10, 50, 5]); // should return [1,2,5,10,50]
+//solution(null); // should return []
+
+function solution(nums){
+    return Array.isArray(nums) ? nums.sort((a, b) => a - b) : [];
+}
+
+
+//The binary representation of 1234 is 10011010010, so the function should return 5 in this case
+
+var countBits = function(n) {
+    return [...Number(n).toString(2)].reduce((a, b) => a + +b, 0)
+};
+
+//findUniq([ 1, 1, 1, 2, 1, 1 ]) === 2
+//findUniq([ 0, 0, 0.55, 0, 0 ]) === 0.55
+
+function findUniq(arr) {
+    return arr.sort()[0] == arr.sort()[1] ? arr.sort()[arr.length - 1] : arr.sort()[0]
+}
+  
+
