@@ -122,3 +122,87 @@ Array.prototype.odd     = function () { return this.filter(function(item) { retu
 
 //Object.assign(Array.prototype, {methods})
 
+//uniqueInOrder('AAAABBBCCDAABBB') == ['A', 'B', 'C', 'D', 'A', 'B']
+//uniqueInOrder('ABBCcAD')         == ['A', 'B', 'C', 'c', 'A', 'D']
+//uniqueInOrder([1,2,2,3,3])       == [1,2,3]
+
+var uniqueInOrder=function(iterable){
+    let res = [];
+    for (let i = 0; i < iterable.length; i++) {
+      if (iterable[i] != iterable[i+1]) {
+        res.push(iterable[i])
+      }
+    }
+    return res;
+}
+//prime
+function isPrime(num) {
+    if (num <= 1) {
+      return false;
+    }
+    else {
+      if (num == 2) {return true;}
+      else if (num % 2 == 0) {return false;}
+      else {
+        for (let i = 2; i < num; i ++) {
+          if (num % i == 0) {
+            return false;
+          }
+        }
+        return true;
+      }
+    }
+  }
+
+//The main idea is to count all the occurring characters in a string. If you have a string like aba, then the result should be {'a': 2, 'b': 1}.
+function count (string) {  
+  let obj = {}
+  let arr = [...new Set (string)].forEach(char => {
+    obj[char] = string.split("").filter(x => x == char).length;
+  })
+  return obj;
+}
+
+
+//solution("camelCasing")  ==  "camel Casing"
+
+function solution(string) {
+    return [...string].map(x => x == x.toUpperCase() ? " " + x : x).join("");
+}
+
+//Given n, take the sum of the digits of n. If that value has more than one digit, continue reducing in this way until a single-digit number is produced. The input will be a non-negative integer.
+function digital_root(n) {
+    let N = String(n).split("").reduce((a, b) => +a + +b, 0)
+    if ( N < 10) {return N}
+    return digital_root(N)
+  }
+
+//It should remove all values from list a, which are present in list b keeping their order.
+function arrayDiff(a, b) {
+    let arr = [...a]
+     b.forEach(d => {
+       arr = arr.filter(x => x != d);
+     })
+     return arr
+}
+
+arrayDiff([1,2,3], [1,2]);
+
+
+//"Indivisibilities" -> 2 # 'i' occurs seven times and 's' occurs twice
+
+function duplicateCount(text){
+    let counter = 0;
+    text = text.toLowerCase();
+    for (let i = 0; i < text.length; i++) {
+      if (text.length - text.split(text[i]).join("").length >= 2 ) {
+        text = text.split(text[i]).join("")
+        counter++
+      }
+    }
+    return counter
+  }
+
+  duplicateCount("aabbcde")
+
+  //
