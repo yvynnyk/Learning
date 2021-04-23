@@ -94,4 +94,31 @@ function findUniq(arr) {
     return arr.sort()[0] == arr.sort()[1] ? arr.sort()[arr.length - 1] : arr.sort()[0]
 }
   
+//[2, 4, 0, 100, 4, 11, 2602, 36]
+//Should return: 11 (the only odd number)
+
+//[160, 3, 1719, 19, 11, 13, -21]
+//Should return: 160 (the only even number)
+
+function findOutlier(integers){
+    return integers.filter(x => x % 2 == 0).length == 1 ? integers.filter(x => x % 2 == 0)[0] : integers.filter(x => x % 2 != 0)[0]
+}
+
+
+//var numbers = [1, 2, 3, 4, 5];
+//numbers.square();  // must return [1, 4, 9, 16, 25]
+//numbers.cube();    // must return [1, 8, 27, 64, 125]
+//numbers.average(); // must return 3
+//numbers.sum();     // must return 15
+//numbers.even();    // must return [2, 4]
+//numbers.odd();     // must return [1, 3, 5]
+
+Array.prototype.square  = function () { return this.map(function(n) { return n*n; }); }
+Array.prototype.cube    = function () { return this.map(function(n) { return n*n*n; }); }
+Array.prototype.average = function () { return this.sum() / this.length; }
+Array.prototype.sum     = function () { return this.reduce(function(a, b) { return a + b; }, 0); }
+Array.prototype.even    = function () { return this.filter(function(item) { return 0 == item % 2; }); }
+Array.prototype.odd     = function () { return this.filter(function(item) { return 0 != item % 2; }); }
+
+//Object.assign(Array.prototype, {methods})
 
