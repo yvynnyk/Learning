@@ -70,7 +70,7 @@ console.log(superSize(700000000001) ==710000000000);
 //If the sequence is empty, you should return 0.
 
 function evenLast(numbers) {
-    return numbers.length != 0 ? [...numbers.filter((x, i) => i % 2 == 0)].reduce((sum, num) => sum + num) * numbers[numbers.length - 1] : 0
+    return numbers.length != 0 ? [...numbers.filter((x, i) => i % 2 == 0)].reduce((sum, num) => sum + num) * numbers[numbers.length - 1] : 0;
 }
 
 //solution([1, 2, 10, 50, 5]); // should return [1,2,5,10,50]
@@ -84,7 +84,7 @@ function solution(nums){
 //The binary representation of 1234 is 10011010010, so the function should return 5 in this case
 
 var countBits = function(n) {
-    return [...Number(n).toString(2)].reduce((a, b) => a + +b, 0)
+    return [...Number(n).toString(2)].reduce((a, b) => a + +b, 0);
 };
 
 //findUniq([ 1, 1, 1, 2, 1, 1 ]) === 2
@@ -193,16 +193,83 @@ arrayDiff([1,2,3], [1,2]);
 
 function duplicateCount(text){
     let counter = 0;
-    text = text.toLowerCase();
+    let str = text.toLowerCase();
     for (let i = 0; i < text.length; i++) {
-      if (text.length - text.split(text[i]).join("").length >= 2 ) {
-        text = text.split(text[i]).join("")
+      if (str.length - str.split(text[i]).join("").length >= 2 ) {
+        str = str.split(text[i]).join("")
         counter++
+        console.log(str , counter , i)
       }
     }
     return counter
   }
 
-  duplicateCount("aabbcde")
+  console.log(duplicateCount("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"))
 
   //
+
+function iqTest(numbers){
+    const l = numbers.split(" ").filter(x => +x % 2 == 0).length;
+    const a = numbers.split(" ").indexOf(numbers.split(" ").filter(x => +x % 2 == 0)[0])
+    const b = numbers.split(" ").indexOf(numbers.split(" ").filter(x => +x % 2 != 0)[0])
+    
+    return l == 1 ? a + 1 : b + 1
+}
+
+
+String.prototype.camelCase=function(){
+    return this.length != 0 ? this.trim().split(" ").map(word => word[0].toUpperCase() + word.slice(1)).join("") : ""
+}
+
+  " camel case word".camelCase()
+
+
+  // 1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153, 1^4 + 6^4 + 5^4 + 2^4 = 1 + 1296 + 625 + 16 = 1938
+  function narcissistic(value) {
+    return [...new String(value)].reduce((sum, num) => sum + Math.pow(+num, [...new String(value)].length), 0) == value;
+}
+
+//solution('abcdef') // should return ['ab', 'cd', 'ef']
+
+let str = "abcdef"
+
+function solution (str) {
+    let arr = [];
+    if (str.length % 2 == 0) {
+        for (let i = 0; i < str.length; i += 2){
+            arr.push(str.slice(i, i + 2))
+        }
+    }
+}
+
+solution (str);
+
+//anagrams('racer', ['crazer', 'carer', 'racar', 'caers', 'racer']) => ['carer', 'racer']
+
+function anagrams(word, words) {
+    /*
+    let w = [...word].sort().join("");
+    let ws = [...words].map(word => [...word].sort().join(""));
+    let arr = [];
+    for (let i = 0; i < ws.length; i ++) {
+      if (w == ws[i]) {
+        arr.push(words[i])
+      }
+    }
+    return arr;
+    */
+    
+    return words.filter(x => [...x].sort().join("") == [...word].sort().join(""))
+      
+  }
+
+//var list1 = [
+//  { firstName: 'Emily', lastName: 'N.', country: 'Ireland', continent: 'Europe', age: 30, language: 'Ruby' },
+// { firstName: 'Nor', lastName: 'E.', country: 'Malaysia', continent: 'Asia', age: 20, language: 'Clojure' }
+//];
+function addUsername(list) {
+    list.map(obj => {
+         obj.username = (obj.firstName).toLowerCase() + (obj.lastName)[0].toLowerCase() + ((new Date ()).getFullYear() - obj.age); 
+     })
+   return list;
+ }
